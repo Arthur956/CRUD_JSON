@@ -68,14 +68,14 @@ namespace CRUD_JSON
             Console.ReadLine();
 
             //Create
-            bewerkingen.VoegPuntToe(bestaandelijst, "Willems", "Wim", "NaWe", 7.5);
+            //bewerkingen.VoegPuntToe(bestaandelijst, "Willems", "Wim", "NaWe", 7.5);
             //Read
-            bewerkingen.ToonLeerlingen(bestaandelijst);
-            bewerkingen.ToonPunten(bestaandelijst, "Willems", "Wim");
+            //bewerkingen.ToonLeerlingen(bestaandelijst);
+            //bewerkingen.ToonPunten(bestaandelijst, "Willems", "Wim");
             //Update
             bewerkingen.PasPuntAan(bestaandelijst, "Willems", "Wim", "NaWe", 9.5);
             //Delete
-            bewerkingen.VerwijderPunten(bestaandelijst, "Willems", "Wim", "NaWe");
+            //bewerkingen.VerwijderPunten(bestaandelijst, "Willems", "Wim", "NaWe");
 
         }
 
@@ -111,9 +111,24 @@ namespace CRUD_JSON
 
     public class Crud
     {
-        public void PasPuntAan(Leerlingen lijst, string v1, string v2, string v3, double v4)
+        public void PasPuntAan(Leerlingen lijst, string naam, string voornaam, string vak, double punten)
         {
-            throw new NotImplementedException();
+            foreach (Leerling ll in lijst.LeerlingLijst)
+            {
+                if (ll.Naam == naam && ll.Voornaam == voornaam)
+                {
+                    Console.WriteLine("LEERLING: " + naam + " " + voornaam + " GEVONDEN");
+                    foreach (Punt p in ll.Punten)
+                    {
+                        if (p.Vak == vak)
+                        {
+                            p.Punten = punten;
+                            Console.WriteLine("VAK " + vak + " GEVONDEN EN AANGEPAST");
+                        }
+                    }
+                }
+            }
+            Console.ReadLine(); ;
         }
 
         public void ToonLeerlingen(Leerlingen lijst)
@@ -126,9 +141,23 @@ namespace CRUD_JSON
             throw new NotImplementedException();
         }
 
-        public void VerwijderPunten(Leerlingen lijst, string v1, string v2, string v3)
+        public void VerwijderPunten(Leerlingen lijst, string naam, string voornaam, string vak)
         {
-            throw new NotImplementedException();
+            foreach (Leerling ll in lijst.LeerlingLijst)
+            {
+                if (ll.Naam == naam && ll.Voornaam == voornaam)
+                {
+                    foreach (Punt p in ll.Punten)
+                    {
+                        if (p.Vak == vak)
+                        {
+                            var itemtoremove = ll.Punten.Single(r => r.Vak == vak);
+                            ll.Punten.Remove(itemtoremove);
+                        }
+                    }
+                }
+
+            }
         }
 
         public void VoegPuntToe(Leerlingen lijst, string v1, string v2, string v3, double v4)
