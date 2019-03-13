@@ -131,14 +131,27 @@ namespace CRUD_JSON
             Console.ReadLine(); ;
         }
 
-        public void ToonLeerlingen(Leerlingen lijst)
+        public void ToonLeerlingen(Leerlingen bestaandelijst)
         {
-            throw new NotImplementedException();
+            foreach (Leerling ll in bestaandelijst.LeerlingLijst)
+            {
+                Console.WriteLine(ll.ToString());
+            }
+            Console.ReadLine();
         }
 
-        public void ToonPunten(Leerlingen lijst, string v1, string v2)
+        public void ToonPunten(List<Leerlingen> lijst, string naam, string voornaam)
         {
-            throw new NotImplementedException();
+            foreach (Leerling ll in lijst)
+            {
+                if (ll.Naam == naam && ll.Voornaam == voornaam)
+                {
+                    foreach ( Punt p in lijst)
+                    {
+                        Console.WriteLine(p);
+                    }
+                }
+            }
         }
 
         public void VerwijderPunten(Leerlingen lijst, string naam, string voornaam, string vak)
@@ -162,7 +175,7 @@ namespace CRUD_JSON
 
         public void VoegPuntToe(Leerlingen lijst, string v1, string v2, string v3, double v4)
         {
-            throw new NotImplementedException();
+            lijst.LeerlingLijst[0].Punten.Add(new Punt("Informatica", 5));
         }
     }
 
